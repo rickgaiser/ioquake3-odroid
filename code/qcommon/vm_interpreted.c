@@ -438,21 +438,21 @@ nextInstruction2:
 				Com_Error( ERR_DROP, "OP_LOAD4 misaligned" );
 			}
 #endif
-			r0 = *opStack = *(int *)&image[ r0&dataMask&~3 ];
+			r0 = *opStack = *(int *)&image[ r0&dataMask ];
 			goto nextInstruction2;
 		case OP_LOAD2:
-			r0 = *opStack = *(unsigned short *)&image[ r0&dataMask&~1 ];
+			r0 = *opStack = *(unsigned short *)&image[ r0&dataMask ];
 			goto nextInstruction2;
 		case OP_LOAD1:
 			r0 = *opStack = image[ r0&dataMask ];
 			goto nextInstruction2;
 
 		case OP_STORE4:
-			*(int *)&image[ r1&(dataMask & ~3) ] = r0;
+			*(int *)&image[ r1&(dataMask) ] = r0;
 			opStack -= 2;
 			goto nextInstruction;
 		case OP_STORE2:
-			*(short *)&image[ r1&(dataMask & ~1) ] = r0;
+			*(short *)&image[ r1&(dataMask) ] = r0;
 			opStack -= 2;
 			goto nextInstruction;
 		case OP_STORE1:
